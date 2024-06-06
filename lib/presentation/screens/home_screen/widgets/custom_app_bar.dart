@@ -7,7 +7,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
+    return SliverAppBar(
+      floating: true,
+      titleSpacing: 20.0,
+      leadingWidth: 0.0,
       title: const Row(
         mainAxisSize: MainAxisSize.max,
         children: [

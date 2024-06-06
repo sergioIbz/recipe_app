@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:recipe_app/config/theme/app_theme.dart';
-import 'package:recipe_app/presentation/screens/home_screen/widgets/custom_app_bar.dart';
+import 'widgets/categories_card.dart';
+import 'widgets/custom_app_bar.dart';
+import 'widgets/custom_title.dart';
+import 'widgets/recipe_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,41 +10,72 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
-      body: Center(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: AppTheme.firstColor,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: const Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(
-                    'https://forbes.co/_next/image?url=https%3A%2F%2Fcdn.forbes.co%2F2023%2F09%2FLucas-Mosna_GettyImages-1174648824-scaled.jpg%3Fv%3D25601709&w=3840&q=75'),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              SizedBox(
-                width: 80,
-                child: Text(
-                  'hamburguesa',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 13,
-                  ),
+      body: CustomScrollView(
+        slivers: [
+          const CustomAppBar(),
+          SliverList(
+            delegate: SliverChildListDelegate([
+              const CustomTitle('Categorias'),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    ...List.generate(
+                      10,
+                      (index) => const Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: CategoriesCard(),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 33,
-              ),
-            ],
+              const CustomTitle('Recetas'),
+              Column(
+                children: [
+                  ...List.generate(
+                    10,
+                    (index) => Padding(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 30).copyWith(
+                        bottom: 15,
+                      ),
+                      child: const RecipeCard(),
+                    ),
+                  )
+                ],
+              )
+            ]),
+          )
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Home',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add_circle,
+            ),
+            label: 'Agregar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+            ),
+            label: 'Usuario',
+          ),
+        ],
       ),
     );
   }
