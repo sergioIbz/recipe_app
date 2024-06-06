@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       floating: true,
-      titleSpacing: 20.0,
+      titleSpacing: 10.0,
       leadingWidth: 0.0,
       title: const Row(
         mainAxisSize: MainAxisSize.max,

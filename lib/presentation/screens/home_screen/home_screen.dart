@@ -5,6 +5,7 @@ import 'widgets/custom_title.dart';
 import 'widgets/recipe_card.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const name = 'home-screen ';
   const HomeScreen({super.key});
 
   @override
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                     10,
                     (index) => Padding(
                       padding:
-                          const EdgeInsets.symmetric(horizontal: 30).copyWith(
+                          const EdgeInsets.symmetric(horizontal: 10).copyWith(
                         bottom: 15,
                       ),
                       child: const RecipeCard(),
